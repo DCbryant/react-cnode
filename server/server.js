@@ -16,7 +16,7 @@ app.get('*',(req,res) => {
     // 服务端入口
     const appString = reactSSR.renderToString(serverEntry)
     // 将服务端入口代码注入到模板html中
-    res.send(template.replace('<app></app>',appString))
+    res.send(template.replace('<!-- app -->',appString))
 })
 
 
