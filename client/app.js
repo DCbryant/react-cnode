@@ -3,7 +3,7 @@ import React from 'react'
 import App from './App.jsx'
 
 
-ReactDOM.render(
+ReactDOM.hydrate(
     <App />,
-    document.body
+    document.getElementById('root')
 )

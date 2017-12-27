@@ -1,15 +1,15 @@
 const path = require('path')
-const HtmlPlugin = require('html-webpack-plugin')
 
 module.exports = {
+    target:'node',
     entry:{
-        app:path.join(__dirname,'../client/app.js'),
+        app:path.join(__dirname,'../client/server-entry.js'),
     },
     output:{
-        filename:'[name].[hash].js',
+        filename:'server-entry.js',
         path:path.join(__dirname,'../dist'),
-        //publicPath加在我们引用前面的路径 
-        publicPath:'',
+        publicPath:'/public',
+        libraryTarget:'commonjs2'
     },
     module:{
         rules:[
@@ -26,7 +26,4 @@ module.exports = {
             }
         ]
     },
-    plugins:[
-        new HtmlPlugin(),
-    ]
 }
