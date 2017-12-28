@@ -45,6 +45,9 @@ if(isDev){
         historyApiFallback:{
             // 所有404的内容都需要返回index.html
             index:'/public/index.html'
+        },
+        proxy:{
+            '/api':'http://localhost:3333'
         }
     }
     config.plugins.push(new webpack.HotModuleReplacementPlugin())

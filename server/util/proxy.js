@@ -1,4 +1,5 @@
 const axios = require('axios')
+const queryString = require('query-string')
 
 const baseUrl = 'http://cnodejs.org/api/v1'
 
@@ -14,15 +15,18 @@ module.exports = (req,res,next) => {
         })
     }
 
-    const query = Object.assign({},req.query)
+    const query = Object.assign({},req.query,{
+        accesstoken:(needAccessToken && req.method === 'GET') ? user.accessToken : ''
+    })
     if(query.needAccessToken) delete query.needAccessToken
 
     axios(`${baseUrl}${path}`,{
         method:req.method,
         params:query,
-        data:Object.assign({},req.body,{
-            accesstoken:user.accessToken
-        }),
+        // {accessToken:xxx} => {accessToken=xxx},使用formdata的方式
+        data:queryString.stringify(Object.assign({},req.body,{
+            accesstoken:(needAccessToken && req.method === 'POST') ? user.accessToken : ''
+        })),
         header:{
             'Content-Type':'application/x-www-form-urlencoded'
         }

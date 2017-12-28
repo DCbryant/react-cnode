@@ -19,6 +19,7 @@ app.use(session({
     secret:'react cnode',
     saveUninitialized:false,
 }))
+
 app.use(favicon(path.join(__dirname,'../favicon.ico')))
 
 app.use('/api/user',require('./util/handle-login'))
