@@ -3,12 +3,26 @@ const reactSSR = require('react-dom/server')
 const path = require('path')
 const fs = require('fs')
 const favicon = require('serve-favicon')
+const bodyParser = require('body-parser')
+const session = require('express-session')
 
 
 const isDev = process.env.NODE_ENV === 'development'
 const app = express()
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(session({
+    maxAge:60*1000*10,
+    name:'tid',
+    resave:false,
+    secret:'react cnode',
+    saveUninitialized:false,
+}))
 app.use(favicon(path.join(__dirname,'../favicon.ico')))
+
+app.use('/api/user',require('./util/handle-login'))
+app.use('/api',require('./util/proxy'))
 
 if(!isDev){
     // 读取模板html
