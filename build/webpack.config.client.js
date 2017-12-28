@@ -21,6 +21,10 @@ const config = webpackMerge(baseConfig,{
         new HtmlPlugin({
             template:path.join(__dirname,'../client/template.html')
         }),
+        new HtmlPlugin({
+            template:'!!ejs-compiled-loader!' + path.join(__dirname,'../client/server.template.ejs'),
+            filename:'server.ejs',
+        })
     ]
 })
 // localhost:8888/filename,而上面output我们配置了publicPath，所以下面也需要配置
