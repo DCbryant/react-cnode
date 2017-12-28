@@ -2,7 +2,9 @@ const path = require('path')
 const HtmlPlugin = require('html-webpack-plugin')
 const isDev = process.env.NODE_ENV = 'development'
 const webpack = require('webpack')
-const config = {
+const webpackMerge = require('webpack-merge')
+const baseConfig = require('./webpack.base')
+const config = webpackMerge(baseConfig,{
     entry:{
         app:path.join(__dirname,'../client/app.js'),
     },
@@ -14,27 +16,13 @@ const config = {
         // 这个插件，从而让我们的热更新没有触发，导致页面每次更新
         publicPath:'/public/',
     },
-    module:{
-        rules:[
-            {
-                test:/\.jsx$/,
-                loader:'babel-loader',
-            },
-            {
-                test:/\.js$/,
-                loader:'babel-loader',
-                exclude:[
-                    path.join(__dirname,'../node_modules')
-                ]
-            }
-        ]
-    },
+    
     plugins:[
         new HtmlPlugin({
             template:path.join(__dirname,'../client/template.html')
         }),
     ]
-}
+})
 // localhost:8888/filename,而上面output我们配置了publicPath，所以下面也需要配置
 // 同时还有一个坑，我们必须把dist删除掉，因为webpack默认先读取磁盘上的内容，然后才读取内存上的内容
 // 而webpack-dev-server需要读取内存上的内容，因为磁盘上的内容没有我们需要编译的内容

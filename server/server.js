@@ -2,10 +2,13 @@ const express = require('express')
 const reactSSR = require('react-dom/server')
 const path = require('path')
 const fs = require('fs')
+const favicon = require('serve-favicon')
 
 
 const isDev = process.env.NODE_ENV === 'development'
 const app = express()
+
+app.use(favicon(path.join(__dirname,'../favicon.ico')))
 
 if(!isDev){
     // 读取模板html
@@ -21,6 +24,7 @@ if(!isDev){
         res.send(template.replace('<!-- app -->',appString))
     }) 
 }else{
+    // 开发时就使用dev-static
     const devStatic = require('./util/dev-static')
     devStatic(app)
 }
