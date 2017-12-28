@@ -6,6 +6,8 @@ module.exports = webpackMerge(baseConfig,{
     entry:{
         app:path.join(__dirname,'../client/server-entry.js'),
     },
+    // 除去依赖
+    externals:Object.keys(require('../package.json').dependencies),
     output:{
         filename:'server-entry.js',
         path:path.join(__dirname,'../dist'),

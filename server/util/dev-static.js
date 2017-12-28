@@ -9,7 +9,9 @@ const proxy = require('http-proxy-middleware')
 // 异步获取数据
 const asyncBootstrap = require('react-async-bootstrapper').default
 const ejs = require('ejs')
+// 将对象序列化(变成字符串)
 const serialize = require('serialize-javascript')
+const Helmet = require('react-helmet').default
 
 
 const getStoreState = (stores) => {
@@ -28,6 +30,21 @@ const getTemplate = () => {
             })
             .catch(reject)
     })
+}
+
+const NativeModule = require('module')
+const vm = require('vm')
+const getModuleFromString = (bundle,filename) => {
+    const m = {exports:{}}
+    const wrapper = NativeModule.wrap(bundle)
+    const script = new vm.Script(wrapper,{
+        filename:filename,
+        displayErrors:true
+    })
+    const result = script.runInThisContext()
+    // 这种方法可以获取当前环境的require，因此可以不需要依赖
+    result.call(m.exports,m.exports,require,m)
+    return m
 }
 
 // hack：创造一个module构造函数
@@ -51,9 +68,12 @@ serverCompiler.watch({},(err,stats) => {
     )
     // 读取webpack编译的内容
     const bundle = mfs.readFileSync(bundlePath,'utf-8')
-    const m = new Module()
-    // 让modlue去解析bundle的内容,生成一个新的模块
-    m._compile(bundle,'server-entry.js')
+    // 这种方法必须依赖那些包(react)
+    // const m = new Module()
+    // 让modlue去解析bundle的内容,生成一个新的模块,
+    // m._compile(bundle,'server-entry.js')
+
+    const m = getModuleFromString(bundle,'server-entry.js')
     serverBundle = m.exports.default
     // 获取serverEntry里面的AppState
     createStoreMap = m.exports.createStoreMap
@@ -79,6 +99,7 @@ module.exports = (app) => {
                     res.end()
                     return
                 }
+                const helmet = Helmet.rewind()
                 const state = getStoreState(stores)
                 // 获取模板文件并将server bundle插入到模板文件中
                 const content = ReactDomServer.renderToString(app)
@@ -86,6 +107,10 @@ module.exports = (app) => {
                 const html = ejs.render(template,{
                     appString:content,
                     initialState:serialize(state),
+                    meta:helmet.meta.toString(),
+                    title:helmet.title.toString(),
+                    style:helmet.style.toString(),
+                    link:helmet.link.toString(),
                 })
                 res.send(html)
                 // res.send(template.replace('<!-- app -->',content))

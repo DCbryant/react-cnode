@@ -8,8 +8,8 @@ import {
 import {Provider} from 'mobx-react'
 import AppState from './store/app-state'
 
+// 获取模板中的state，并且注入到appState中
 const initialState = window.__INITIAL__STATE__  || {}
-
 
 const root = document.getElementById('root')
 const render = (Component,renderMethod) => {
