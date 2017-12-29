@@ -46,7 +46,7 @@ if(isDev){
         overlay:{
             errors:true
         },
-        publicPath:'/public/',
+        publicPath:'/public',
         historyApiFallback:{
             // 所有404的内容都需要返回index.html
             index:'/public/index.html'
