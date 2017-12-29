@@ -31,6 +31,7 @@ const config = webpackMerge(baseConfig,{
 // 同时还有一个坑，我们必须把dist删除掉，因为webpack默认先读取磁盘上的内容，然后才读取内存上的内容
 // 而webpack-dev-server需要读取内存上的内容，因为磁盘上的内容没有我们需要编译的内容
 if(isDev){
+    config.devtool = '#cheap-module-eval-source-map'
     config.entry = {
         app:[
             'react-hot-loader/patch',
@@ -40,12 +41,12 @@ if(isDev){
     config.devServer = {
         host:'0.0.0.0',
         port:'8888',
-        contentBase:path.join(__dirname,'../dist'),
+        // contentBase:path.join(__dirname,'../dist'),
         hot:true,
         overlay:{
             errors:true
         },
-        publicPath:'/public',
+        publicPath:'/public/',
         historyApiFallback:{
             // 所有404的内容都需要返回index.html
             index:'/public/index.html'

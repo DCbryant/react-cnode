@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import {AppState} from '../../store/store'
 import Helmet from 'react-helmet'
 import Button from 'material-ui/Button'
+import Container from '../layout/container'
 
 @inject('appState')
 @observer
@@ -18,14 +19,14 @@ export default class TopicList extends React.Component{
     }
     render(){
         return(
-            <div>
+            <Container>
                 <Helmet>
                     <title>topic list</title>
                     <meta name='description' content='description' />
                 </Helmet>
                 <Button raised color='primary'>button</Button>
                 <div>{this.props.appState.msg}</div>
-            </div>
+            </Container>
         )
     }
 }
