@@ -8,7 +8,7 @@ import {
 import {MuiThemeProvider,createMuiTheme} from 'material-ui/styles'
 import {lightBlue,pink} from 'material-ui/colors'
 import {Provider} from 'mobx-react'
-import AppState from './store/app-state'
+import {AppState,TopicStore} from './store/store'
 
 const theme = createMuiTheme({
     palette:{
@@ -39,10 +39,14 @@ const createApp = (TheApp) => {
 // 获取模板中的state，并且注入到appState中
 const initialState = window.__INITIAL__STATE__  || {}
 const root = document.getElementById('root')
+
+const appState = new AppState(initialState.appState)
+const topicStore = new TopicStore(initialState.topicStore)
+
 const render = (Component,renderMethod) => {
     ReactDOM[renderMethod](
         <AppContainer>
-            <Provider appState={new AppState(initialState.appState)}>
+            <Provider appState={appState} topicStore={topicStore}>
                 <BrowserRouter>
                     <MuiThemeProvider theme={theme}>
                         <Component />

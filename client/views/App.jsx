@@ -5,7 +5,7 @@ import MainAppBar from './layout/app-bar.jsx'
 class App extends React.Component{
     render(){
         return [
-            <MainAppBar key='appbar' />,
+            <MainAppBar key='app-bar' />,
             <Route key='route' />,
         ]
     }
