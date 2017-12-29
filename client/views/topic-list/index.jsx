@@ -9,6 +9,8 @@ import Tabs,{Tab} from 'material-ui/Tabs'
 import TopicListItem from './list-item.jsx'
 import List from 'material-ui/List' //这里错了，引入错了！！！
 import {CircularProgress} from 'material-ui/Progress'
+import queryString from 'query-string'
+import {tabs} from '../../util/vairable-define'
 
 @inject(stores => {
     return {
@@ -18,15 +20,19 @@ import {CircularProgress} from 'material-ui/Progress'
 })
 @observer
 export default class TopicList extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            tabIndex:0
-        }
+    static contextTypes = {
+        router:PropTypes.object,
     }
 
     componentDidMount(){
-        this.props.topicStore.fetchTopics()
+        const tab = this.getTab()
+        this.props.topicStore.fetchTopics(tab)
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.location.search !== this.props.location.search){
+            this.props.topicStore.fetchTopics(this.getTab(nextProps.location.search))
+        }
     }
 
     asyncBootstrap(){
@@ -38,9 +44,10 @@ export default class TopicList extends React.Component{
         })
     }
 
-    changeTab = (e,index) => {
-        this.setState({
-            tabIndex:index
+    changeTab = (e,value) => {
+        this.context.router.history.push({
+            pathname:'/list',
+            search:`?tab=${value}`,
         })
     }
 
@@ -48,32 +55,37 @@ export default class TopicList extends React.Component{
 
     }
 
+    getTab = (search) => {
+        search = search || this.props.location.search
+        const query = queryString.parse(search)
+        return query.tab || 'all'
+    }
+
     render(){
-        const {tabIndex} = this.state
         const {topicStore} = this.props
         const topicList = topicStore.topics
         const syncingTopics = topicStore.syncing
+        const tab = this.getTab()
         return(
             <Container>
                 <Helmet>
                     <title>topic list</title>
                     <meta name='description' content='description' />
                 </Helmet>
-                <Tabs value={tabIndex} onChange={this.changeTab}>
-                    <Tab label='全部' />
-                    <Tab label='精华' />
-                    <Tab label='分享' />
-                    <Tab label='问答' />
-                    <Tab label='招聘' />
-                    <Tab label='客户端测试' />
+                <Tabs value={tab} onChange={this.changeTab}>
+                    {
+                        Object.keys(tabs).map(t => (
+                            <Tab label={tabs[t]} value={t} key={t} />
+                        ))
+                    }
                 </Tabs>
                 <List>
                     {
                         topicList.map(topic => (
                             <TopicListItem 
+                                key={topic.id}
                                 topic={topic} 
                                 onClick={this.ListItemClick} 
-                                key={topic.id}
                             />
                         ))
                     }
@@ -99,4 +111,8 @@ export default class TopicList extends React.Component{
 TopicList.wrappedComponent.propTypes = {
     appState:PropTypes.instanceOf(AppState),
     topicStore:PropTypes.instanceOf(TopicStore),
+}
+
+TopicList.propTypes = {
+    location:PropTypes.object.isRequired
 }

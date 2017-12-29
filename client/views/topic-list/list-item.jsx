@@ -6,13 +6,22 @@ import Avatar from 'material-ui/Avatar'
 import ListItemText from 'material-ui/List/ListItemText'
 import {withStyles} from 'material-ui/styles'
 import {topicPrimaryStyle,topicSecondaryStyles} from './styles'
+import {tabs} from '../../util/vairable-define'
+import cx from 'classnames'
 
-const Primary = ({classes,topic}) => (
-    <div className={classes.root}>
-        <span className={classes.tab}>{topic.tab}</span>
-        <span className={classes.title}>{topic.title}</span>
-    </div>
-)
+
+const Primary = ({classes,topic}) => {
+    const classNames = cx({
+        [classes.tab]:true,
+        [classes.top]:topic.top,
+    })
+    return (
+        <div className={classes.root}>
+            <span className={classNames}>{topic.top ? '置顶' : tabs[topic.tab]}</span>
+            <span className={classes.title}>{topic.title}</span>
+        </div>
+    )
+}
 
 Primary.propTypes = {
     topic:PropTypes.object.isRequired,
