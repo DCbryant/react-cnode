@@ -12,6 +12,7 @@ import {CircularProgress} from 'material-ui/Progress'
 import queryString from 'query-string'
 import {tabs} from '../../util/vairable-define'
 
+
 @inject(stores => {
     return {
         appState:stores.appState,
@@ -51,8 +52,8 @@ export default class TopicList extends React.Component{
         })
     }
 
-    ListItemClick = () => {
-
+    ListItemClick = (topic) => {
+        this.context.router.history.push(`/detail/${topic.id}`)
     }
 
     getTab = (search) => {
@@ -85,7 +86,7 @@ export default class TopicList extends React.Component{
                             <TopicListItem 
                                 key={topic.id}
                                 topic={topic} 
-                                onClick={this.ListItemClick} 
+                                onClick={() => {this.ListItemClick(topic)}} 
                             />
                         ))
                     }

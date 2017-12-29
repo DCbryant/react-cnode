@@ -8,6 +8,7 @@ import {withStyles} from 'material-ui/styles'
 import {topicPrimaryStyle,topicSecondaryStyles} from './styles'
 import {tabs} from '../../util/vairable-define'
 import cx from 'classnames'
+import dateFormat from 'dateformat'
 
 
 const Primary = ({classes,topic}) => {
@@ -38,7 +39,7 @@ const Secondary = ({classes,topic}) => (
             <span>/</span>
             <span>{topic.visit_count}</span>
         </span>
-        <span>创建时间：{topic.create_at}</span>
+        <span>创建时间：{dateFormat(topic.create_at,'yy年mm月dd日')}</span>
     </span>
 )
 
@@ -49,7 +50,7 @@ Secondary.propTypes = {
 
 const StyledSecondary = withStyles(topicSecondaryStyles)(Secondary)
 const TopicListItem =({onClick,topic}) => (
-    <ListItem button>
+    <ListItem button onClick={onClick}>
         <ListItemAvatar>
             <Avatar src={topic.author.avatar_url} />
         </ListItemAvatar>

@@ -20,13 +20,22 @@ class Topic{
 }
 
 class TopicStore{
-    constructor({syncing,topics} = {syncing:false,topics:[]}){
+    constructor({syncing=false,topics=[],details=[]} = {}){
         this.syncing = syncing
         this.topics = topics.map(topic => new Topic(createTopic(topic)))
+        this.details = details.map(topic => new Topic(createTopic(topic)))
     }
 
     @observable topics
     @observable syncing
+    @observable details
+
+    @computed get detailMap(){
+        return this.details.reduce((result,detail) => {
+            result[detail.id] = detail
+            return result
+        },{})
+    }
 
     addTopic = (topic) => {
         this.topics.push(new Topic(createTopic(topic)))
@@ -55,6 +64,27 @@ class TopicStore{
             })
         })
     }
+
+    @action getTopicDetail(id){
+        return new Promise((resolve,reject) => {
+            if(this.detailMap[id]){
+                resolve(this.detailMap[id])
+            }else{
+                get(`/topic/${id}`,{
+                    mdrender:false
+                }).then(resp => {
+                    if(resp.success){
+                        const topic = new Topic(createTopic(resp.data))
+                        this.details.push(topic)
+                        resolve(topic)
+                    }else{
+                        reject()
+                    }
+                }).catch(reject)
+            }
+        })
+    }
+
 }
 
 
