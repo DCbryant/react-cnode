@@ -37,7 +37,7 @@ class MainAppBar extends React.Component{
     }
 
     createButtonClick = () => {
-
+        this.context.router.history.push('/topic/create')
     }
 
     loginButtonClick = () => {

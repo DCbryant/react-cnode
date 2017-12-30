@@ -54,6 +54,7 @@ class TopicStore{
     @observable topics
     @observable syncing
     @observable details
+    @observable createdTopics = []
 
     @computed get detailMap(){
         return this.details.reduce((result,detail) => {
@@ -107,6 +108,31 @@ class TopicStore{
                     }
                 }).catch(reject)
             }
+        })
+    }
+
+    @action createTopic(title,tab,content){
+        return new Promise((resolve,reject) => {
+            post('/topics',{
+                needAccessToken:true,
+            },{
+                title,tab,content
+            })
+                .then(resp => {
+                    if(resp.success){
+                        const topic = {
+                            title,
+                            tab,
+                            content,
+                            id:resp.topic_id,
+                            create_at:Date.now()
+                        }
+                        this.createdTopics.push(new Topic(createTopic(topic)))
+                        resolve()
+                    }else{
+                        reject()
+                    }
+                }).catch(reject)
         })
     }
 
