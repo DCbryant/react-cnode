@@ -82,22 +82,26 @@ export default class TopicList extends React.Component{
                         ))
                     }
                 </Tabs>
-                <List style={{backgroundColor:'#dfdfdf'}} >
-                    {
-                        createdTopics.map(topic => {
-                            topic = Object.assign({},topic,{
-                                author:user.info,
+                {
+                    (createdTopics && createdTopics.length > 0) ?
+                    <List style={{backgroundColor:'#dfdfdf'}} >
+                        {
+                            createdTopics.map(topic => {
+                                topic = Object.assign({},topic,{
+                                    author:user.info,
+                                })
+                                return (
+                                    <TopicListItem 
+                                        key={topic.id}
+                                        topic={topic} 
+                                        onClick={() => {this.ListItemClick(topic)}} 
+                                    />
+                                )
                             })
-                            return (
-                                <TopicListItem 
-                                    key={topic.id}
-                                    topic={topic} 
-                                    onClick={() => {this.ListItemClick(topic)}} 
-                                />
-                            )
-                        })
-                    }
-                </List>
+                        }
+                    </List>:
+                    null
+                }
                 <List>
                     {
                         topicList.map(topic => (

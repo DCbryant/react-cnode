@@ -43,12 +43,8 @@ class UserInfo extends React.Component{
     }
 
     componentWillMount(){
-        if(!this.props.user.isLogin){
-            this.context.router.history.push('/user/login')
-        }else{
-            this.props.appState.getUserDetail()
-            this.props.appState.getUserCollection()
-        }
+        this.props.appState.getUserDetail()
+        this.props.appState.getUserCollection()
     }
 
     gotoTopic = (id) => {
