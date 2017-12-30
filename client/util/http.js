@@ -9,6 +9,7 @@ const parseUrl = (url,params) => {
     return `${baseUrl}/api/${url}?${str.substr(0,str.length - 1)}`
 }
 
+
 export const get = (url,params) => {
     return new Promise((resolve,reject) => {
         axios.get(parseUrl(url,params))
@@ -24,17 +25,16 @@ export const get = (url,params) => {
     })
 }
 
-export const post = (url,params,datas) => {
-    return new promise((resolve,reject) => {
-        axios.post(parseUrl(url,params,datas))
+export const  post = (url,params,datas) => {
+    return new Promise((resolve,reject) => {
+        axios.post(parseUrl(url,params),datas)
             .then(resp => {
-                const data = resp.data
+                const {data} = resp
                 if(data && data.success === true){
                     resolve(data)
                 }else{
                     reject(data)
                 }
-            })
-            .catch(reject)
+            }).catch(reject)
     })
 }

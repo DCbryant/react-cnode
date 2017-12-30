@@ -27,7 +27,7 @@ module.exports = (req,res,next) => {
         data:queryString.stringify(Object.assign({},req.body,{
             accesstoken:(needAccessToken && req.method === 'POST') ? user.accessToken : ''
         })),
-        header:{
+        headers:{
             'Content-Type':'application/x-www-form-urlencoded'
         }
     }).then(resp => {
