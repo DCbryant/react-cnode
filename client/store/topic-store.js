@@ -45,16 +45,18 @@ class Topic{
 }
 
 class TopicStore{
-    constructor({syncing=false,topics=[],details=[]} = {}){
+    constructor({syncing=false,topics=[],details=[],tab=null} = {}){
         this.syncing = syncing
         this.topics = topics.map(topic => new Topic(createTopic(topic)))
         this.details = details.map(topic => new Topic(createTopic(topic)))
+        this.tab = tab
     }
 
     @observable topics
     @observable syncing
     @observable details
     @observable createdTopics = []
+    @observable tab
 
     @computed get detailMap(){
         return this.details.reduce((result,detail) => {
@@ -69,6 +71,10 @@ class TopicStore{
 
     @action fetchTopics(tab){
         return new Promise((resolve,reject) => {
+            if(tab === this.tab && this.topics.length > 0){ //若两者相同就不必再继续发送请求了
+                resolve()
+            }
+            this.tab = tab
             this.syncing = true
             this.topics = []
             get('/topics',{
@@ -134,6 +140,16 @@ class TopicStore{
                     }
                 }).catch(reject)
         })
+    }
+
+
+    toJson(){
+        return{
+            topics:toJS(this.topics),
+            syncing:toJS(this.syncing),
+            details:toJS(this.details),
+            tab:this.tab,
+        }
     }
 
 }
