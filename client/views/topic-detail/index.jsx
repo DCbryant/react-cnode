@@ -12,15 +12,30 @@ import {CircularProgress} from 'material-ui/Progress'
 import Container from '../layout/container'
 import {topicDetailStyle} from './styles'
 import Reply from './reply.jsx'
+import SimpleMDE from 'react-simplemde-editor'
+import dateFormat from 'dateformat'
+import Button from 'material-ui/Button'
+import IconReply from 'material-ui-icons/Reply'
 
 @inject(stores => {
     return {
-        appState:stores.appState,
+        user:stores.appState.user,
         topicStore:stores.topicStore
     }
 })
 @observer
 class TopicDetail extends React.Component{
+    static contextTypes = {
+        router:PropTypes.object,
+    }
+
+    constructor(props){
+        super(props)
+        this.state = {
+            newReply:'',
+        }
+    }
+
     componentDidMount(){
         const id = this.getTopicId()
         this.props.topicStore.getTopicDetail(id)
@@ -30,10 +45,35 @@ class TopicDetail extends React.Component{
         return this.props.match.params.id   
     }
 
+    handleNewReplyChange = (value) => {
+        this.setState({
+            newReply:value,
+        })
+    }
+
+    gotoLogin = () => {
+        this.context.router.history.push('/user/login')
+    }
+
+    doReply = () => {
+        const id = this.getTopicId()
+        const topic = this.props.topicStore.detailMap[id]
+        topic.doReply(this.state.newReply)
+        .then(() => {
+            this.setState({
+                newReply:''
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     render(){
         const {classes} = this.props
         const id = this.getTopicId()
         const topic = this.props.topicStore.detailMap[id]
+        const {user} = this.props
         if(!topic){
             return (
                 <Container>
@@ -58,11 +98,70 @@ class TopicDetail extends React.Component{
                     </header>
                 </Container>
 
+                {      
+                    (topic.createdReplies && topic.createdReplies.length > 0) ? 
+                    (
+                        <Paper elevation={4} className={classes.replies}>
+                            <header className={classes.replyHeader}>
+                                <span>我的最新回复</span>
+                                <span>{`${topic.createdReplies.length}条`}</span>
+                            </header>
+                            {
+                                topic.createdReplies.map(reply => (
+                                    <Reply 
+                                        key={reply.id}
+                                        reply={Object.assign({},reply,{
+                                            author:{
+                                                avatar_url:user.info.avatar_url,
+                                                loginname:user.info.loginname,
+                                            }
+                                        })}
+                                    />
+                                ))
+                            }
+                        </Paper>
+                    ):
+                    null
+                }
+
                 <Paper elevation={4} className={classes.replies}>
                     <header className={classes.replyHeader}>
                         <span>{`${topic.reply_count} 回复`}</span>
-                        <span>{`最新回复 ${topic.last_reply_at}`}</span>
+                        <span>{`最新回复 ${dateFormat(topic.last_reply_at,'yy年mm月dd日')}`}</span>
                     </header>
+                    {
+                        user.isLogin ? 
+                        <section className={classes.replyEditor}>
+                            <SimpleMDE 
+                                onChange={this.handleNewReplyChange}
+                                value={this.state.newReply}
+                                options={{
+                                    toolbar:false,
+                                    autoFocus:false,
+                                    spellChecker:false,
+                                    placeholder:'添加您的精彩回复',
+                                }}
+                            />
+                            <Button 
+                                fab 
+                                color="primary" 
+                                onClick={this.doReply} 
+                                className={classes.replyButton} 
+                            >
+                                <IconReply />
+                            </Button>
+                        </section>:
+                        null
+                    }
+                    {
+                        !user.isLogin ?
+                        <section className={classes.notLoginButton}>
+                            <Button raised color='accent' onClick={this.gotoLogin}>
+                                登陆并进行回复
+                            </Button>
+                        </section>:
+                        null
+                    }
                     <section>
                          {
                              topic.replies.map(reply => (
@@ -81,7 +180,7 @@ class TopicDetail extends React.Component{
 
 
 TopicDetail.wrappedComponent.propTypes = {
-    appState:PropTypes.object.isRequired,
+    user:PropTypes.object.isRequired,
     topicStore:PropTypes.object.isRequired,
 }
 
