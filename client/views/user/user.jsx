@@ -10,7 +10,11 @@ import UserIcon from 'material-ui-icons/AccountCircle'
 import Container from '../layout/container'
 import userStyles from './styles/user-style'
 
-
+@inject(stores => {
+    return {
+        user:stores.appState.user
+    }
+})
 class User extends React.Component{
     componentDidMount(){
 
@@ -18,19 +22,19 @@ class User extends React.Component{
 
     render(){
         const {classes} = this.props
-        const user = {}
+        const {isLogin,info} = this.props.user
         return(
             <Container>
                 <div className={classes.avatar}>
                     <div className={classes.bg} />
                     {
-                        user.avatar_url ? 
-                        <Avatar className={classes.avatarImg} src={user.avatar_url} /> :
+                        info.avatar_url ? 
+                        <Avatar className={classes.avatarImg} src={info.avatar_url} /> :
                         <Avatar className={classes.avatarImg}>
                             <UserIcon />
                         </Avatar>
                     }
-                    <span className={classes.userName}>{user.loginname || '未登录'}</span>
+                    <span className={classes.userName}>{info.loginname || '未登录'}</span>
                 </div>
                 {this.props.children}
             </Container>
@@ -38,6 +42,10 @@ class User extends React.Component{
     }
 }
 
+
+User.wrappedComponent.propTypes = {
+    user:PropTypes.object.isRequired,
+}
 
 User.propTypes = {
     classes:PropTypes.object.isRequired,
