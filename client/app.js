@@ -41,9 +41,9 @@ const initialState = window.__INITIAL__STATE__  || {}
 const root = document.getElementById('root')
 
 const appState = new AppState()
-// 服务端渲染用initialState.appState.user port:3333
+// 服务端渲染用initialState.appState.user port:3333,并且用{user}
 // 前端用initialState.appState port:8888
-appState.init(initialState.appState.user)
+appState.init(initialState.appState)
 const topicStore = new TopicStore(initialState.topicStore)
 
 const render = (Component,renderMethod) => {

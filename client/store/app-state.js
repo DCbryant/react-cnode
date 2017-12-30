@@ -23,7 +23,7 @@ export default class AppState{
         }
     }
 
-    init(user){
+    init({user}){
         if(user){
             this.user = user
         }
