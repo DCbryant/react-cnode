@@ -21,23 +21,31 @@ const getStoreState = (stores) => {
 }
 
 module.exports = (bundle,template,req,res) => {
-    return new Promise((resolve,reject) => {
-        const createStoreMap = bundle.createStoreMap
-        const createApp = bundle.default 
-        const routerContext = {}
-        const stores = createStoreMap()
-        const theme = createMuiTheme({
-            palette:{
-                primary:colors.pink,
-                accent:colors.lightBlue,
-                type:'light'
-            }
-        })
-        const sheetsRegistry = new SheetsRegistry()
-        const jss = create(preset())
-        jss.options.createGenerateClassName = createGenerateClassName 
-        const app = createApp(stores,routerContext,sheetsRegistry,jss,theme,req.url)
+    const user = req.session.user
+    const createStoreMap = bundle.createStoreMap
+    const createApp = bundle.default 
+    const routerContext = {}
+    const stores = createStoreMap()
+
+    if(user){
+        stores.appState.user.isLogin = true
+        stores.appState.user.info = user
+    }
+
+    const theme = createMuiTheme({
+        palette:{
+            primary:colors.pink,
+            accent:colors.lightBlue,
+            type:'light'
+        }
+    })
+
+    const sheetsRegistry = new SheetsRegistry()
+    const jss = create(preset())
+    jss.options.createGenerateClassName = createGenerateClassName 
+    const app = createApp(stores,routerContext,sheetsRegistry,jss,theme,req.url)
         
+    return new Promise((resolve,reject) => {
         // 可以在这里进行数据初始化，然后再进行react的渲染
         asyncBootstrap(app).then(() => {
             if(routerContext.url){

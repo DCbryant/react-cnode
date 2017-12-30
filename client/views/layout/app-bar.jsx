@@ -51,6 +51,7 @@ class MainAppBar extends React.Component{
     render(){
         const {classes} = this.props
         const {user} = this.props.appState
+        console.log(user.info.loginname)
         return(
             <div className={classes.root}>
                 <AppBar position='fixed'>

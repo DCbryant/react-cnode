@@ -73,27 +73,28 @@ class TopicStore{
         return new Promise((resolve,reject) => {
             if(tab === this.tab && this.topics.length > 0){ //若两者相同就不必再继续发送请求了
                 resolve()
+            }else{
+                this.tab = tab
+                this.syncing = true
+                this.topics = []
+                get('/topics',{
+                    mdrender:false,
+                    tab,
+                }).then(resp => {
+                    if(resp.success){
+                        this.topics = resp.data.map(topic => {
+                            return new Topic(createTopic(topic))
+                        })
+                        resolve()
+                    }else{
+                        reject()
+                    }
+                    this.syncing = false
+                }).catch(err => {
+                    reject(err)
+                    this.syncing = false
+                })
             }
-            this.tab = tab
-            this.syncing = true
-            this.topics = []
-            get('/topics',{
-                mdrender:false,
-                tab,
-            }).then(resp => {
-                if(resp.success){
-                    this.topics = resp.data.map(topic => {
-                        return new Topic(createTopic(topic))
-                    })
-                    resolve()
-                }else{
-                    reject()
-                }
-                this.syncing = false
-            }).catch(err => {
-                reject(err)
-                this.syncing = false
-            })
         })
     }
 
@@ -142,7 +143,7 @@ class TopicStore{
         })
     }
 
-
+    // 客户端初始化的时候能拿到这些值
     toJson(){
         return{
             topics:toJS(this.topics),

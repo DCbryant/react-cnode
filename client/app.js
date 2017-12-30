@@ -40,7 +40,10 @@ const createApp = (TheApp) => {
 const initialState = window.__INITIAL__STATE__  || {}
 const root = document.getElementById('root')
 
-const appState = new AppState(initialState.appState)
+const appState = new AppState()
+// 服务端渲染用initialState.appState.user port:3333
+// 前端用initialState.appState port:8888
+appState.init(initialState.appState.user)
 const topicStore = new TopicStore(initialState.topicStore)
 
 const render = (Component,renderMethod) => {
