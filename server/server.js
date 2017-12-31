@@ -50,6 +50,9 @@ app.use((error,req,res,next) => {
     res.status(500).send(error + '服务端渲染错误')
 })
 
-app.listen(3333,() => {
+const host = process.env.HOST || '0.0.0.0'
+const port = process.env.PORT || 3333
+
+app.listen(3333,port,host,() => {
     console.log('server is listening on 3333')
 })
