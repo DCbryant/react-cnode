@@ -1,9 +1,11 @@
 const path = require('path')
 const HtmlPlugin = require('html-webpack-plugin')
-const isDev = process.env.NODE_ENV = 'development'
 const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.base')
+const isDev = process.env.NODE_ENV === 'development'
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const NameAllModulesPlugin = require('name-all-modules-plugin')
 const config = webpackMerge(baseConfig,{
     entry:{
         app:path.join(__dirname,'../client/app.js'),
@@ -56,7 +58,48 @@ if(isDev){
         }
     }
     config.plugins.push(new webpack.HotModuleReplacementPlugin())
+}else{
+    config.entry = {
+        app:path.join(__dirname,'../client/app.js'),
+        // 以下依赖包不再更新
+        vendor:[
+            'react',
+            'react-dom',
+            'react-router-dom',
+            'mobx',
+            'mobx-react',
+            'axios',
+            'query-string',
+            'dateformat',
+            'marked'
+        ]
+    }
+    config.output.filename = '[name].[chunkhash].js'
+    // 压缩js
+    config.plugins.push(
+        new UglifyJsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            name:'vendor'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name:'manifest',
+            minChunks:Infinity,
+        }),
+        new webpack.NamedModulesPlugin(),
+        new NameAllModulesPlugin(),
+        new webpack.DefinePlugin({
+            'process.env':{
+                NODE_ENV:JSON.stringify('production')
+            }
+        }),
+        new webpack.NamedChunksPlugin((chunk) => {
+            if(chunk.name){
+                return chunk.name
+            }
+            return chunk.mapModules(m => path.relative(m.context,m.request)).join('_')
+        })
+    )
+    // 9M -> 856k
 }
-
 
 module.exports = config

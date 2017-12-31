@@ -29,6 +29,7 @@ export default class AppState{
         }
     }
 
+    // 一刷新user就没了
     @action login(accessToken) {
         return new Promise((resolve, reject) => {
             axios.post('/api/user/login', {
