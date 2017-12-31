@@ -2313,27 +2313,9 @@ var replySchema = exports.replySchema = {
   is_uped: false
 };
 
-var _default = {
+exports.default = {
   tabs: tabs
 };
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(tabs, 'tabs', 'F:/code/learn-react/react-cnode/client/util/vairable-define.js');
-
-  __REACT_HOT_LOADER__.register(topicSchema, 'topicSchema', 'F:/code/learn-react/react-cnode/client/util/vairable-define.js');
-
-  __REACT_HOT_LOADER__.register(replySchema, 'replySchema', 'F:/code/learn-react/react-cnode/client/util/vairable-define.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/util/vairable-define.js');
-}();
-
-;
 
 /***/ }),
 /* 51 */
@@ -3350,24 +3332,7 @@ Container.propTypes = {
     children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.element), _propTypes2.default.element])
 };
 
-var _default = (0, _styles.withStyles)(styles)(Container);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(styles, 'styles', 'F:/code/learn-react/react-cnode/client/views/layout/container.jsx');
-
-    __REACT_HOT_LOADER__.register(Container, 'Container', 'F:/code/learn-react/react-cnode/client/views/layout/container.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/layout/container.jsx');
-}();
-
-;
+exports.default = (0, _styles.withStyles)(styles)(Container);
 
 /***/ }),
 /* 63 */
@@ -5301,30 +5266,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.AppState = _appState2.default;
 exports.TopicStore = _topicStore2.default;
-var _default = {
+exports.default = {
     AppState: _appState2.default,
     TopicStore: _topicStore2.default
 };
-exports.default = _default;
 var createStoreMap = exports.createStoreMap = function createStoreMap() {
     return {
         appState: new _appState2.default(),
         topicStore: new _topicStore2.default()
     };
 };
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(createStoreMap, 'createStoreMap', 'F:/code/learn-react/react-cnode/client/store/store.js');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/store/store.js');
-}();
-
-;
 
 /***/ }),
 /* 98 */
@@ -5380,23 +5331,6 @@ var post = exports.post = function post(url, params, datas) {
         }).catch(reject);
     });
 };
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(baseUrl, 'baseUrl', 'F:/code/learn-react/react-cnode/client/util/http.js');
-
-    __REACT_HOT_LOADER__.register(parseUrl, 'parseUrl', 'F:/code/learn-react/react-cnode/client/util/http.js');
-
-    __REACT_HOT_LOADER__.register(get, 'get', 'F:/code/learn-react/react-cnode/client/util/http.js');
-
-    __REACT_HOT_LOADER__.register(post, 'post', 'F:/code/learn-react/react-cnode/client/util/http.js');
-}();
-
-;
 
 /***/ }),
 /* 100 */
@@ -6704,19 +6638,6 @@ var replyStyle = exports.replyStyle = {
     }
   }
 };
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(topicDetailStyle, 'topicDetailStyle', 'F:/code/learn-react/react-cnode/client/views/topic-detail/styles.js');
-
-  __REACT_HOT_LOADER__.register(replyStyle, 'replyStyle', 'F:/code/learn-react/react-cnode/client/views/topic-detail/styles.js');
-}();
-
-;
 
 /***/ }),
 /* 141 */
@@ -7525,11 +7446,6 @@ var User = (_dec = (0, _mobxReact.inject)(function (stores) {
                 this.props.children
             );
         }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
     }]);
 
     return User;
@@ -7544,22 +7460,7 @@ User.propTypes = {
     classes: _propTypes2.default.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(_userStyle2.default)(User);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(User, 'User', 'F:/code/learn-react/react-cnode/client/views/user/user.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/user/user.jsx');
-}();
-
-;
+exports.default = (0, _styles.withStyles)(_userStyle2.default)(User);
 
 /***/ }),
 /* 151 */
@@ -7937,7 +7838,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // 让mobx在服务端渲染的时候不会重复数据变换
 (0, _mobxReact.useStaticRendering)(true);
 
-var _default = function _default(stores, routerContext, sheetsRegistry, jss, theme, url) {
+exports.default = function (stores, routerContext, sheetsRegistry, jss, theme, url) {
     return _react2.default.createElement(
         _mobxReact.Provider,
         stores,
@@ -7957,19 +7858,7 @@ var _default = function _default(stores, routerContext, sheetsRegistry, jss, the
     );
 };
 
-exports.default = _default;
 exports.createStoreMap = _store.createStoreMap;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/server-entry.js');
-}();
-
-;
 
 /***/ }),
 /* 155 */
@@ -8020,31 +7909,12 @@ var App = function (_React$Component) {
         value: function render() {
             return [_react2.default.createElement(_appBar2.default, { key: 'app-bar' }), _react2.default.createElement(_router2.default, { key: 'route' })];
         }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
     }]);
 
     return App;
 }(_react2.default.Component);
 
-var _default = App;
-exports.default = _default;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(App, 'App', 'F:/code/learn-react/react-cnode/client/views/App.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/App.jsx');
-}();
-
-;
+exports.default = App;
 
 /***/ }),
 /* 156 */
@@ -8127,28 +7997,11 @@ PrivateRoute.defaultProps = {
     isLogin: false
 };
 
-var _default = function _default() {
+exports.default = function () {
     return [_react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, render: function render() {
             return _react2.default.createElement(_reactRouterDom.Redirect, { to: 'list' });
         }, key: '/' }), _react2.default.createElement(_reactRouterDom.Route, { path: '/list', component: _index2.default, key: 'list' }), _react2.default.createElement(_reactRouterDom.Route, { path: '/detail/:id', component: _index4.default, key: 'detail' }), _react2.default.createElement(_reactRouterDom.Route, { path: '/user/login', component: _login2.default, key: 'login' }), _react2.default.createElement(InjectedPrivateRoute, { path: '/user/info', component: _info2.default, key: 'info' }), _react2.default.createElement(InjectedPrivateRoute, { path: '/topic/create', component: _index6.default, key: 'createTopic' })];
 };
-
-exports.default = _default;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(PrivateRoute, 'PrivateRoute', 'F:/code/learn-react/react-cnode/client/config/router.jsx');
-
-    __REACT_HOT_LOADER__.register(InjectedPrivateRoute, 'InjectedPrivateRoute', 'F:/code/learn-react/react-cnode/client/config/router.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/config/router.jsx');
-}();
-
-;
 
 /***/ }),
 /* 157 */
@@ -9129,11 +8982,6 @@ var TopicList = (_dec = (0, _mobxReact.inject)(function (stores) {
                 ) : null
             );
         }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
     }]);
 
     return TopicList;
@@ -9151,17 +8999,6 @@ TopicList.wrappedComponent.propTypes = {
 TopicList.propTypes = {
     location: _propTypes2.default.object.isRequired
 };
-;
-
-var _temp3 = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(TopicList, 'TopicList', 'F:/code/learn-react/react-cnode/client/views/topic-list/index.jsx');
-}();
-
-;
 
 /***/ }),
 /* 162 */
@@ -9325,11 +9162,6 @@ var AppState = (_class = function () {
                 user: (0, _mobx.toJS)(this.user)
             };
         }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
     }]);
 
     return AppState;
@@ -9352,17 +9184,6 @@ var AppState = (_class = function () {
     }
 }), _applyDecoratedDescriptor(_class.prototype, 'login', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'login'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'getUserDetail', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'getUserDetail'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'getUserCollection', [_mobx.action], Object.getOwnPropertyDescriptor(_class.prototype, 'getUserCollection'), _class.prototype)), _class);
 exports.default = AppState;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(AppState, 'AppState', 'F:/code/learn-react/react-cnode/client/store/app-state.js');
-}();
-
-;
 
 /***/ }),
 /* 163 */
@@ -9470,11 +9291,6 @@ var Topic = (_class = function () {
                     }
                 }).catch(reject);
             });
-        }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
         }
     }]);
 
@@ -9627,11 +9443,6 @@ var TopicStore = (_class3 = function () {
             };
         }
     }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
-    }, {
         key: 'detailMap',
         get: function get() {
             return this.details.reduce(function (result, detail) {
@@ -9660,27 +9471,7 @@ var TopicStore = (_class3 = function () {
     enumerable: true,
     initializer: null
 }), _applyDecoratedDescriptor(_class3.prototype, 'detailMap', [_mobx.computed], Object.getOwnPropertyDescriptor(_class3.prototype, 'detailMap'), _class3.prototype), _applyDecoratedDescriptor(_class3.prototype, 'fetchTopics', [_mobx.action], Object.getOwnPropertyDescriptor(_class3.prototype, 'fetchTopics'), _class3.prototype), _applyDecoratedDescriptor(_class3.prototype, 'getTopicDetail', [_mobx.action], Object.getOwnPropertyDescriptor(_class3.prototype, 'getTopicDetail'), _class3.prototype), _applyDecoratedDescriptor(_class3.prototype, 'createTopic', [_mobx.action], Object.getOwnPropertyDescriptor(_class3.prototype, 'createTopic'), _class3.prototype)), _class3);
-var _default = TopicStore;
-exports.default = _default;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(_createTopic, 'createTopic', 'F:/code/learn-react/react-cnode/client/store/topic-store.js');
-
-    __REACT_HOT_LOADER__.register(createReply, 'createReply', 'F:/code/learn-react/react-cnode/client/store/topic-store.js');
-
-    __REACT_HOT_LOADER__.register(Topic, 'Topic', 'F:/code/learn-react/react-cnode/client/store/topic-store.js');
-
-    __REACT_HOT_LOADER__.register(TopicStore, 'TopicStore', 'F:/code/learn-react/react-cnode/client/store/topic-store.js');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/store/topic-store.js');
-}();
-
-;
+exports.default = TopicStore;
 
 /***/ }),
 /* 164 */
@@ -17445,29 +17236,7 @@ TopicListItem.propTypes = {
     topic: _propTypes2.default.object.isRequired
 };
 
-var _default = TopicListItem;
-exports.default = _default;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(Primary, 'Primary', 'F:/code/learn-react/react-cnode/client/views/topic-list/list-item.jsx');
-
-    __REACT_HOT_LOADER__.register(StyledPrimary, 'StyledPrimary', 'F:/code/learn-react/react-cnode/client/views/topic-list/list-item.jsx');
-
-    __REACT_HOT_LOADER__.register(Secondary, 'Secondary', 'F:/code/learn-react/react-cnode/client/views/topic-list/list-item.jsx');
-
-    __REACT_HOT_LOADER__.register(StyledSecondary, 'StyledSecondary', 'F:/code/learn-react/react-cnode/client/views/topic-list/list-item.jsx');
-
-    __REACT_HOT_LOADER__.register(TopicListItem, 'TopicListItem', 'F:/code/learn-react/react-cnode/client/views/topic-list/list-item.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/topic-list/list-item.jsx');
-}();
-
-;
+exports.default = TopicListItem;
 
 /***/ }),
 /* 291 */
@@ -17894,19 +17663,6 @@ var topicSecondaryStyles = exports.topicSecondaryStyles = function topicSecondar
         }
     };
 };
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(topicPrimaryStyle, 'topicPrimaryStyle', 'F:/code/learn-react/react-cnode/client/views/topic-list/styles.js');
-
-    __REACT_HOT_LOADER__.register(topicSecondaryStyles, 'topicSecondaryStyles', 'F:/code/learn-react/react-cnode/client/views/topic-list/styles.js');
-}();
-
-;
 
 /***/ }),
 /* 294 */
@@ -19136,11 +18892,6 @@ var TopicDetail = (_dec = (0, _mobxReact.inject)(function (stores) {
                 )
             );
         }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
     }]);
 
     return TopicDetail;
@@ -19159,22 +18910,7 @@ TopicDetail.propTypes = {
     classes: _propTypes2.default.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(_styles2.topicDetailStyle)(TopicDetail);
-
-exports.default = _default;
-;
-
-var _temp2 = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(TopicDetail, 'TopicDetail', 'F:/code/learn-react/react-cnode/client/views/topic-detail/index.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/topic-detail/index.jsx');
-}();
-
-;
+exports.default = (0, _styles.withStyles)(_styles2.topicDetailStyle)(TopicDetail);
 
 /***/ }),
 /* 301 */
@@ -19243,22 +18979,7 @@ Reply.propTypes = {
     classes: _propTypes2.default.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(_styles2.replyStyle)(Reply);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(Reply, 'Reply', 'F:/code/learn-react/react-cnode/client/views/topic-detail/reply.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/topic-detail/reply.jsx');
-}();
-
-;
+exports.default = (0, _styles.withStyles)(_styles2.replyStyle)(Reply);
 
 /***/ }),
 /* 302 */
@@ -19402,11 +19123,6 @@ var UserLogin = (_dec = (0, _mobxReact.inject)(function (stores) {
                 )
             );
         }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
     }]);
 
     return UserLogin;
@@ -19425,22 +19141,7 @@ UserLogin.propTypes = {
     location: _propTypes2.default.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(_loginStyle2.default)(UserLogin);
-
-exports.default = _default;
-;
-
-var _temp2 = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(UserLogin, 'UserLogin', 'F:/code/learn-react/react-cnode/client/views/user/login.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/user/login.jsx');
-}();
-
-;
+exports.default = (0, _styles.withStyles)(_loginStyle2.default)(UserLogin);
 
 /***/ }),
 /* 303 */
@@ -24548,7 +24249,7 @@ var _bg2 = _interopRequireDefault(_bg);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _default = function _default() {
+exports.default = function () {
   return {
     root: {},
     avatar: {
@@ -24593,19 +24294,6 @@ var _default = function _default() {
   };
 };
 
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/user/styles/user-style.js');
-}();
-
-;
-
 /***/ }),
 /* 332 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -24624,7 +24312,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var inputWidth = 300;
 
-var _default = function _default() {
+exports.default = function () {
   return {
     root: {
       padding: '60px 20px',
@@ -24641,21 +24329,6 @@ var _default = function _default() {
     }
   };
 };
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(inputWidth, 'inputWidth', 'F:/code/learn-react/react-cnode/client/views/user/styles/login-style.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/user/styles/login-style.js');
-}();
-
-;
 
 /***/ }),
 /* 334 */
@@ -24896,11 +24569,6 @@ var UserInfo = (_dec = (0, _mobxReact.inject)(function (stores) {
                 )
             );
         }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
     }]);
 
     return UserInfo;
@@ -24918,24 +24586,7 @@ UserInfo.propTypes = {
     classes: _propTypes2.default.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(_userInfoStyle2.default)(UserInfo);
-
-exports.default = _default;
-;
-
-var _temp3 = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(TopicItem, 'TopicItem', 'F:/code/learn-react/react-cnode/client/views/user/info.jsx');
-
-    __REACT_HOT_LOADER__.register(UserInfo, 'UserInfo', 'F:/code/learn-react/react-cnode/client/views/user/info.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/user/info.jsx');
-}();
-
-;
+exports.default = (0, _styles.withStyles)(_userInfoStyle2.default)(UserInfo);
 
 /***/ }),
 /* 335 */
@@ -25974,7 +25625,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _default = function _default(theme) {
+exports.default = function (theme) {
   return {
     root: {
       padding: 16,
@@ -26000,19 +25651,6 @@ var _default = function _default(theme) {
     }
   };
 };
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/user/styles/user-info-style.js');
-}();
-
-;
 
 /***/ }),
 /* 345 */
@@ -26226,11 +25864,6 @@ var TopicCreate = (_dec = (0, _mobxReact.inject)(function (stores) {
                 )
             );
         }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
     }]);
 
     return TopicCreate;
@@ -26247,22 +25880,7 @@ TopicCreate.propTypes = {
     classes: _propTypes2.default.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(_styles3.default)(TopicCreate);
-
-exports.default = _default;
-;
-
-var _temp2 = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(TopicCreate, 'TopicCreate', 'F:/code/learn-react/react-cnode/client/views/topic-create/index.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/topic-create/index.jsx');
-}();
-
-;
+exports.default = (0, _styles.withStyles)(_styles3.default)(TopicCreate);
 
 /***/ }),
 /* 346 */
@@ -27302,7 +26920,7 @@ exports.default = RadioGroup;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _default = {
+exports.default = {
     root: {
         padding: 20,
         position: 'relative'
@@ -27324,18 +26942,6 @@ var _default = {
         }
     }
 };
-exports.default = _default;
-;
-
-var _temp = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/topic-create/styles.js');
-}();
-
-;
 
 /***/ }),
 /* 356 */
@@ -28433,11 +28039,6 @@ var MainAppBar = (_dec = (0, _mobxReact.inject)(function (stores) {
                 )
             );
         }
-    }, {
-        key: '__reactstandin__regenerateByEval',
-        value: function __reactstandin__regenerateByEval(key, code) {
-            this[key] = eval(code);
-        }
     }]);
 
     return MainAppBar;
@@ -28454,24 +28055,7 @@ MainAppBar.propTypes = {
     classes: _propTypes2.default.object.isRequired
 };
 
-var _default = (0, _styles.withStyles)(styles)(MainAppBar);
-
-exports.default = _default;
-;
-
-var _temp3 = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(styles, 'styles', 'F:/code/learn-react/react-cnode/client/views/layout/app-bar.jsx');
-
-    __REACT_HOT_LOADER__.register(MainAppBar, 'MainAppBar', 'F:/code/learn-react/react-cnode/client/views/layout/app-bar.jsx');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'F:/code/learn-react/react-cnode/client/views/layout/app-bar.jsx');
-}();
-
-;
+exports.default = (0, _styles.withStyles)(styles)(MainAppBar);
 
 /***/ }),
 /* 361 */

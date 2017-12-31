@@ -6,6 +6,7 @@ const baseConfig = require('./webpack.base')
 const isDev = process.env.NODE_ENV === 'development'
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const NameAllModulesPlugin = require('name-all-modules-plugin')
+const cdnConfig = require('../app.config').cdn
 const config = webpackMerge(baseConfig,{
     entry:{
         app:path.join(__dirname,'../client/app.js'),
@@ -74,6 +75,7 @@ if(isDev){
             'marked'
         ]
     }
+    config.output.publicPath = cdnConfig.host
     config.output.filename = '[name].[chunkhash].js'
     // 压缩js
     config.plugins.push(
