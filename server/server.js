@@ -28,10 +28,10 @@ app.use('/api',require('./util/proxy'))
 if(!isDev){
     // 读取模板html
     const template = fs.readFileSync(path.join(__dirname,'../dist/server.ejs'),'utf8')
-    // 设置静态目录，只有访问public才返回服务端代码
-    app.use('/public',express.static(path.join(__dirname,'../dist')))
     // server-entry导出的是es6模块，而这里是commonjs模块
     const serverEntry = require('../dist/server-entry')
+    // 设置静态目录，只有访问public才返回服务端代码
+    app.use('/public',express.static(path.join(__dirname,'../dist')))
     app.get('*',(req,res,next) => {
         // 服务端入口
         // const appString = reactSSR.renderToString(serverEntry)
